@@ -1,5 +1,15 @@
 #!/bin/sh
 
+set -e
+
+ROOTDIR=`dirname $0`
+
+function on_error {
+  cd $ROOTDIR
+}
+
+trap on_error EXIT
+
 install_pkg() {
     title="Install package $1"
     
@@ -18,7 +28,7 @@ install_pkg() {
     printf "\n\n"
 }
 
-cd $(dirname $0)
+cd $ROOTDIR
 
 install_pkg rce-util
 install_pkg rce-comm
